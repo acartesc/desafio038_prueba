@@ -1,0 +1,20 @@
+<h1> ToDo: <%= "#{@task.name}" %></h1>
+<%= image_tag @task.photo %>
+
+<%= image_tag current_user.photo %>
+
+<p> Top 5 primeros usuarios que finalizaron actividad: </p>
+
+<% @task.lists.order(updated_at: :desc).take(5).each do |list| %>
+  <%= list.user.email %>
+  <%= image_tag list.user.photo %>
+  <br>
+  <% end %>
+
+<p> Usuarios que finalizaron actividad: </p>
+<% @task.lists.each do |list| %>
+  <% if list.done == true %>
+  <%= list.user.email %>
+  <br>
+  <% end %>
+<% end %>

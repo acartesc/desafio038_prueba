@@ -1,19 +1,26 @@
 <h1> ToDo 18 de Septiembre </h1>
 <div class="container">
-  <%= @tasks.each_slice(3) do |row| %>
+  <%= @list.each_slice(3) do |row| %>
     <div class="row">
-      <% row.each do |task| %>
+      <% row.each do |list| %>
         <div class="col">
           <div class ="card">
-            <%= image_tag task.photo, class: "card-img-top"%>
+            <%= image_tag list.task.photo, class: "card-img-top"%>
             <div class ="body">
-              <h5> <%= task.name %> </h5>
-              <p> <%= task.description %> </p>
-              
+              <h5> <%= list.task.name %> </h5>
+              <p> <%= list.task.description %> </p>
+              <%= link_to "Detalle", task_path(list.task.id), class: "btn btn" %>
+              <% if list.done %>
+                <%= link_to "Tarea Completada", list_path(list.id), class: "btn btn-success", method: :patch %>
+              <% else %>
+                <%= link_to "Tarea Incompleta", list_path(list.id), class: "btn btn-danger", method: :patch %>
+              <% end %>
             </div>
           </div>
         </div>
         <% end %>
       </div>
+      <div class="w-100" style= "margin-top: 20px"></div>
   <% end %>
+
 </div>

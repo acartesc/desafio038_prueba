@@ -1,15 +1,18 @@
 class TasksController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.all
+    @list = List.where(user_id: current_user.id)
   end
 
   # GET /tasks/1
   # GET /tasks/1.json
   def show
+    @lists = List.all
+    @tasks = Task.all
   end
 
   # GET /tasks/new
