@@ -1,16 +1,29 @@
 <h1> ToDo: <%= "#{@task.name}" %></h1>
-<%= image_tag @task.photo %>
+<%= image_tag @task.photo, :size => "300x200" %>
 <br>
 <br>
 <h4> Top 5 primeros usuarios que finalizaron actividad: </h4>
 
+<table class ="table">
+  <tr>
+    <th>Usuario</th>
+    <th>Foto</th>
+  </tr>
+
+
 <% @task.lists.order(updated_at: :desc).take(5).each do |list| %>
+<tr>
   <% if list.done %>
-    <%= list.user.email %>
-    <%= image_tag list.user.photo %>
+
+      <td> <%= list.user.email %> </td>
+      <td> <%= image_tag list.user.photo %> </td>
+
   <% end %>
+</tr>
   <br>
 <% end %>
+  </table>
+
 
 <br>
 <br>
